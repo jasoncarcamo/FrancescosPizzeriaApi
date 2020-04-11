@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using FrancescosPizzeriaApi.Models;
+using FrancescosPizzeriaApi.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrancescosPizzeriaApi
 {
@@ -25,6 +28,8 @@ namespace FrancescosPizzeriaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<FrancescosPizzeriaContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("FrancescosPizzeriaContext")));
+
             services.AddControllers();
         }
 
@@ -39,6 +44,10 @@ namespace FrancescosPizzeriaApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder => {
+                builder.WithOrigins("*").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
 
             app.UseAuthorization();
 
