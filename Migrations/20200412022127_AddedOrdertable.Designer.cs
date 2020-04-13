@@ -4,14 +4,16 @@ using FrancescosPizzeriaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FrancescosPizzeriaApi.Migrations
 {
     [DbContext(typeof(FrancescosPizzeriaContext))]
-    partial class FrancescosPizzeriaContextModelSnapshot : ModelSnapshot
+    [Migration("20200412022127_AddedOrdertable")]
+    partial class AddedOrdertable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,10 +28,10 @@ namespace FrancescosPizzeriaApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DateCreated")
+                    b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Pin")
@@ -38,7 +40,7 @@ namespace FrancescosPizzeriaApi.Migrations
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Wage")
+                    b.Property<decimal>("Wage")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -133,14 +135,8 @@ namespace FrancescosPizzeriaApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool?>("ClockedIn")
+                    b.Property<bool>("ClockedIn")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ClockedInAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ClockedOutAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -148,20 +144,14 @@ namespace FrancescosPizzeriaApi.Migrations
                     b.Property<int>("Employee_id")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("HadBreak")
+                    b.Property<bool>("HadBreak")
                         .HasColumnType("bit");
 
-                    b.Property<decimal?>("Hours")
+                    b.Property<decimal>("Hours")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("OffBreakAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("OnBreak")
+                    b.Property<bool>("OnBreak")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("OnBreakAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

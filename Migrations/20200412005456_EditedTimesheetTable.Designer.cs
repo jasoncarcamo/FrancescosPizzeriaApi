@@ -4,14 +4,16 @@ using FrancescosPizzeriaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FrancescosPizzeriaApi.Migrations
 {
     [DbContext(typeof(FrancescosPizzeriaContext))]
-    partial class FrancescosPizzeriaContextModelSnapshot : ModelSnapshot
+    [Migration("20200412005456_EditedTimesheetTable")]
+    partial class EditedTimesheetTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,10 +28,10 @@ namespace FrancescosPizzeriaApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DateCreated")
+                    b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Pin")
@@ -38,7 +40,7 @@ namespace FrancescosPizzeriaApi.Migrations
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Wage")
+                    b.Property<decimal>("Wage")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -83,9 +85,6 @@ namespace FrancescosPizzeriaApi.Migrations
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("PriceReg")
                         .HasColumnType("decimal(18,2)");
 
@@ -103,27 +102,7 @@ namespace FrancescosPizzeriaApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("MenuItem");
-                });
-
-            modelBuilder.Entity("FrancescosPizzeriaApi.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("FrancescosPizzeriaApi.Models.Timesheet", b =>
@@ -133,14 +112,8 @@ namespace FrancescosPizzeriaApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool?>("ClockedIn")
+                    b.Property<bool>("ClockedIn")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ClockedInAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ClockedOutAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -148,58 +121,18 @@ namespace FrancescosPizzeriaApi.Migrations
                     b.Property<int>("Employee_id")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("HadBreak")
+                    b.Property<bool>("HadBreak")
                         .HasColumnType("bit");
 
-                    b.Property<decimal?>("Hours")
+                    b.Property<decimal>("Hours")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("OffBreakAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("OnBreak")
+                    b.Property<bool>("OnBreak")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("OnBreakAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("TimeSheet");
-                });
-
-            modelBuilder.Entity("FrancescosPizzeriaApi.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("FrancescosPizzeriaApi.Models.MenuItem", b =>
-                {
-                    b.HasOne("FrancescosPizzeriaApi.Models.Order", null)
-                        .WithMany("MenuItem")
-                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }

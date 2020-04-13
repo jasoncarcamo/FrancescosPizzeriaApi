@@ -4,14 +4,16 @@ using FrancescosPizzeriaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FrancescosPizzeriaApi.Migrations
 {
     [DbContext(typeof(FrancescosPizzeriaContext))]
-    partial class FrancescosPizzeriaContextModelSnapshot : ModelSnapshot
+    [Migration("20200413031259_AddedTablesks")]
+    partial class AddedTablesks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

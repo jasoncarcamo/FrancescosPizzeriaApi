@@ -11,7 +11,10 @@ namespace FrancescosPizzeriaApi.Models
         public string Category { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string SizeReg { get; set; }
+        public string SizeSmall { get; set; }
+        public decimal PriceReg { get; set; }
+        public decimal PriceSmall { get; set; }
         public string Ingredients { get; set; }
-        public decimal Price { get; set; }
     }
 }

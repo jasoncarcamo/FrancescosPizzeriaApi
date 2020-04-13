@@ -8,11 +8,11 @@ namespace FrancescosPizzeriaApi.Models
     public class Employee
     {
         public int Id { get; set; }
-        public string EmployeeId {get; set;}
-        public string Position { get; set; }
-        public decimal Wage { get; set; }
-        public int Pin { get; set; }
-        public DateTime DateCreated { get; set; }
+        public int? EmployeeId {get; set;}
+        public string? Position { get; set; }
+        public decimal? Wage { get; set; }
+        public string? Pin { get; set; }
+        public DateTime? DateCreated { get; set; }
  
     }
 }

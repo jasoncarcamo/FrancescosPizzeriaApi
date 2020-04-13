@@ -13,6 +13,9 @@ using Microsoft.Extensions.Logging;
 using FrancescosPizzeriaApi.Models;
 using FrancescosPizzeriaApi.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace FrancescosPizzeriaApi
 {
@@ -28,6 +31,28 @@ namespace FrancescosPizzeriaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "https://localhost:5001/",
+                        ValidAudience = "https://localhost:5001/",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetConnectionString("jwtSecret")))
+                    };
+                });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("auth",
+                    policy => policy.RequireClaim("authorize")
+                    );
+            });
+
+
             services.AddDbContext<FrancescosPizzeriaContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("FrancescosPizzeriaContext")));
 
             services.AddControllers();
@@ -49,6 +74,7 @@ namespace FrancescosPizzeriaApi
                 builder.WithOrigins("*").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
             });
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FrancescosPizzeriaApi.Data;
 using FrancescosPizzeriaApi.Models;
+using FrancescosPizzeriaApi.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace FrancescosPizzeriaApi.Controllers
 {
@@ -16,10 +18,13 @@ namespace FrancescosPizzeriaApi.Controllers
     {
         private readonly FrancescosPizzeriaContext _context;
 
-        public EmployeesController(FrancescosPizzeriaContext context)
+        public EmployeesController(FrancescosPizzeriaContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
+
+        public IConfiguration Configuration  { get; }
 
         // GET: api/Employees
         [HttpGet]
@@ -80,10 +85,24 @@ namespace FrancescosPizzeriaApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
-            _context.Employee.Add(employee);
+            EmployeeService employeeService = new EmployeeService(Configuration);
+
+            Employee newEmployee = employee;
+            Employee dbEmployee = _context.Employee.FirstOrDefault(x => x.EmployeeId == newEmployee.EmployeeId);
+
+            if( dbEmployee != null)
+            {
+                return BadRequest( new { error = "An employee exists with this employee id already"});
+            };
+
+            newEmployee.Pin = employeeService.HashPin(newEmployee, newEmployee.Pin);
+            newEmployee.DateCreated = DateTime.Now;
+
+            _context.Employee.Add(newEmployee);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
+            return Ok( new { success = "Employee created", token = employeeService.createToken(newEmployee)});
         }
 
         // DELETE: api/Employees/5
@@ -91,6 +110,7 @@ namespace FrancescosPizzeriaApi.Controllers
         public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
             var employee = await _context.Employee.FindAsync(id);
+
             if (employee == null)
             {
                 return NotFound();
