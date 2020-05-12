@@ -4,14 +4,16 @@ using FrancescosPizzeriaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FrancescosPizzeriaApi.Migrations
 {
     [DbContext(typeof(FrancescosPizzeriaContext))]
-    partial class FrancescosPizzeriaContextModelSnapshot : ModelSnapshot
+    [Migration("20200415220252_wejkfwerw")]
+    partial class wejkfwerw
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,14 +115,8 @@ namespace FrancescosPizzeriaApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("MobileNumber")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("OrderComplete")
                         .HasColumnType("bit");
@@ -131,13 +127,12 @@ namespace FrancescosPizzeriaApi.Migrations
                     b.Property<int>("PointsEarned")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Order");
                 });
@@ -149,40 +144,15 @@ namespace FrancescosPizzeriaApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ingredients")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("PriceReg")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("PriceSmall")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SizeReg")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SizeSmall")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpecialRequests")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("OrderItem");
                 });
@@ -269,6 +239,20 @@ namespace FrancescosPizzeriaApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("FrancescosPizzeriaApi.Models.Order", b =>
+                {
+                    b.HasOne("FrancescosPizzeriaApi.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("FrancescosPizzeriaApi.Models.OrderItem", b =>
+                {
+                    b.HasOne("FrancescosPizzeriaApi.Models.MenuItem", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId");
                 });
 #pragma warning restore 612, 618
         }

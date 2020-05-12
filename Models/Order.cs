@@ -10,11 +10,17 @@ namespace FrancescosPizzeriaApi.Models
     public class Order
     {
         public int Id { get; set; }
-        public DateTime DateCreated {get; set;}
+        public int PointsEarned { get; set; }
+        public string OrderType { get; set; }
+        public string Address { get; set; }
 
-        public MenuItem[] MenuItem { get; set; }
+        public string MobileNumber { get; set; }
+        public bool OrderComplete { get; set; }
+
+        public DateTime Time { get; set; }
+        public DateTime DateCreated {get; set;}
         
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 }

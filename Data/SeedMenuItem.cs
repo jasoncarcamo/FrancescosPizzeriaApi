@@ -46,6 +46,72 @@ namespace FrancescosPizzeriaApi.Data
                         SizeSmall = "None",
                         PriceReg = 17.45m,
                         PriceSmall = 0.00m
+                    },
+                    new MenuItem
+                    {
+                        Category = "Pasta",
+                        Title = "Alfredo pasta",
+                        Description = "Creamy alfredo sauce with grated parmigiano cheese",
+                        Ingredients = "Alfredo sauce, Grated cheese",
+                        SizeReg = "Regular",
+                        SizeSmall = "Small",
+                        PriceReg = 12.25m,
+                        PriceSmall = 5.95m
+                    },
+                    new MenuItem
+                    {
+                        Category = "Pasta",
+                        Title = "Baked ziti",
+                        Description = "Penne mixed with tomato sauce, ricotta, and topped with mozzarella cheese",
+                        Ingredients = "Tomato sauce, Ricotta, Mozzarella cheese",
+                        SizeReg = "Regular",
+                        SizeSmall = "Small",
+                        PriceReg = 11.95m,
+                        PriceSmall = 5.95m
+                    },
+                    new MenuItem
+                    {
+                        Category = "Pasta",
+                        Title = "Penne al vodka",
+                        Description = "Creamy pink vodka with diced imported proscuitto and onion",
+                        Ingredients = "Vodka sauce, Diced prosciutto, Onion",
+                        SizeReg = "Regular",
+                        SizeSmall = "Small",
+                        PriceReg = 11.95m,
+                        PriceSmall = 5.95m
+                    },
+                    new MenuItem
+                    {
+                        Category = "Hero",
+                        Title = "Chicken parmagiana hero",
+                        Description = "Fried breaded chicken cutlet topped with tomato sauce, and melted mozzarella cheese",
+                        Ingredients = "Fried chicken cutlet, Tomato sauce, Mozzarella cheese",
+                        SizeReg = "Regular",
+                        SizeSmall = "Small",
+                        PriceReg = 11.95m,
+                        PriceSmall = 6.95m
+                    },
+                    new MenuItem
+                    {
+                        Category = "Hero",
+                        Title = "Meatball parmagiana hero",
+                        Description = "$ meatballs topped with tomato sauce, and melted mozzarella cheese",
+                        Ingredients = "Meatballs, Tomato sauce, Mozzarella cheese",
+                        SizeReg = "Regular",
+                        SizeSmall = "Small",
+                        PriceReg = 11.95m,
+                        PriceSmall = 6.95m
+                    },
+                    new MenuItem
+                    {
+                        Category = "Hero",
+                        Title = "Veal parmagiana hero",
+                        Description = "Fried breaded veal topped with tomato sauce, and melted mozzarella cheese",
+                        Ingredients = "Veal, Tomato sauce, Mozzarella cheese",
+                        SizeReg = "Regular",
+                        SizeSmall = "Half",
+                        PriceReg = 10.45m,
+                        PriceSmall = 6.95m
                     }
                 );
             }

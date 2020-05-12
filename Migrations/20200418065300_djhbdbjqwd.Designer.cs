@@ -4,14 +4,16 @@ using FrancescosPizzeriaApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FrancescosPizzeriaApi.Migrations
 {
     [DbContext(typeof(FrancescosPizzeriaContext))]
-    partial class FrancescosPizzeriaContextModelSnapshot : ModelSnapshot
+    [Migration("20200418065300_djhbdbjqwd")]
+    partial class djhbdbjqwd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,9 +168,6 @@ namespace FrancescosPizzeriaApi.Migrations
 
                     b.Property<decimal>("PriceSmall")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
 
                     b.Property<string>("SizeReg")
                         .HasColumnType("nvarchar(max)");

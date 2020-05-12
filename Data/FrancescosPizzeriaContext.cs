@@ -18,6 +18,7 @@ namespace FrancescosPizzeriaApi.Data
         public DbSet<Employee> Employee { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<MenuItem> MenuItem { get; set; }
         public DbSet<Timesheet> TimeSheet { get; set; }
